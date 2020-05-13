@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OneImageComponent/> should be rendered 1`] = `
+<div
+  className="one-image-component"
+>
+  <div
+    className="one-image"
+  >
+    <div
+      className="toolbar"
+    >
+      <div
+        className="close-icon"
+        onClick={[Function]}
+      >
+        <MdClose />
+      </div>
+      <div
+        className="edit-icon"
+        onClick={[Function]}
+      >
+        <MdEdit />
+      </div>
+      <div
+        className="delete-icon"
+        onClick={[Function]}
+      >
+        <MdDelete />
+      </div>
+      <div
+        className="spinner-icon"
+      >
+        <div
+          className="spinner"
+        />
+      </div>
+    </div>
+    <img
+      alt="fake_author"
+    />
+    <div
+      className="details"
+    >
+      <EditableText
+        classNames="details-content title"
+        isInput={false}
+        isReadOnly={false}
+        isSpinner={false}
+        onChange={[Function]}
+        onEnter={[Function]}
+        onTextClick={[Function]}
+        text="fake_author"
+      />
+      <span
+        className="details-content info"
+      >
+        1280 x 1024
+      </span>
+    </div>
+    <div
+      className="right-toolbar"
+    >
+      <div
+        className="right-toolbar-content icon-1"
+        onClick={[Function]}
+      >
+        <MdArrowForward />
+      </div>
+    </div>
+    <div
+      className="left-toolbar"
+    >
+      <div
+        className="left-toolbar-content icon-1"
+        onClick={[Function]}
+      >
+        <MdArrowBack />
+      </div>
+    </div>
+  </div>
+</div>
+`;
