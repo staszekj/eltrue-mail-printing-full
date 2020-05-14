@@ -45,21 +45,10 @@ const useStyles = makeStyles((theme: TThemeReducer) => {
   }
 });
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export const PrintedMails: FunctionComponent<{}> = () => {
 
-  const mails = useSelector(getMails);
+  const rows = useSelector(getMails);
   const theme = useSelector(getTheme);
   const classes = useStyles(theme);
 
@@ -69,27 +58,31 @@ export const PrintedMails: FunctionComponent<{}> = () => {
               {"//TODO toolbar"}
           </div>
           <div className={classes.Main}>
-            <TableContainer component={Paper}>
+            <TableContainer className={classes.ScrollContainer} component={Paper}>
               <Table className={classes.table} size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Dessert (100g serving)</TableCell>
-                    <TableCell align="right">Calories</TableCell>
-                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                    <TableCell>timeStamp</TableCell>
+                    <TableCell align="right">pagesRanges</TableCell>
+                    <TableCell align="right">reason</TableCell>
+                    <TableCell align="right">sentDateMmtUtc</TableCell>
+                    <TableCell align="right">from</TableCell>
+                    <TableCell align="right">subject</TableCell>
+                    <TableCell align="right">filename</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {rows.map((row) => (
-                    <TableRow key={row.name}>
+                    <TableRow key={row.attachmentId}>
                       <TableCell component="th" scope="row">
-                        {row.name}
+                        {row.timeStamp}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.pagesRanges}</TableCell>
+                      <TableCell align="right">{row.reason}</TableCell>
+                      <TableCell align="right">{row.sentDateMmtUtc}</TableCell>
+                      <TableCell align="right">{row.from}</TableCell>
+                      <TableCell align="right">{row.subject}</TableCell>
+                      <TableCell align="right">{row.fileName}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

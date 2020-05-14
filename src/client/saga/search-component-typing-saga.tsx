@@ -3,11 +3,16 @@ import {call, put, select, delay} from 'redux-saga/effects'
 import {
     fetchImageMetaAsyncAction,
     appInitAction,
-    deleteImageAsyncAction
+    deleteImageAsyncAction,
+    fetchPrintedMailsAsyncAction
 } from "../view/app-actions";
 import {TSearchEndpointRequest, TSearchEndpointResponse} from "../../common/search-endpoint";
 import {getSearchComponentInputString} from "../view/app-selectors";
-import {IMAGE_INFO_DELETE_ENDPOINT_PATH, IMAGE_INFO_SEARCH_ENDPOINT_PATH} from '../../common/endpoints'
+import {
+    IMAGE_INFO_DELETE_ENDPOINT_PATH,
+    IMAGE_INFO_SEARCH_ENDPOINT_PATH,
+    PRINTED_EMAILS_ENDPOINT_PATH
+} from "../../common/endpoints";
 import axios from 'axios';
 import {TDeleteEndpointRequest, TDeleteEndpointResponse} from "../../common/delete-endpoint";
 
@@ -22,6 +27,11 @@ export const httpDeleteImageInfo = async (request: TDeleteEndpointRequest) => {
     return serverResponse.data;
 };
 
+export const httpPrintedMails = async () => {
+    const serverResponse = await axios.get<TSearchEndpointResponse>(PRINTED_EMAILS_ENDPOINT_PATH);
+    return serverResponse.data;
+};
+
 export function* appInitSaga(
     action: ActionType<typeof appInitAction>
 ) {
@@ -33,9 +43,11 @@ export function* appInitSaga(
             fetchImageMetaAsyncAction.request(request)
         );
         const data = yield call(httpFetchImageInfo, request);
+        const printedMailsData = yield call(httpPrintedMails);
         yield put(
             fetchImageMetaAsyncAction.success(data)
         );
+        yield put(fetchPrintedMailsAsyncAction.success(printedMailsData))
     } catch (error) {
         yield put(fetchImageMetaAsyncAction.failure({}));
     }

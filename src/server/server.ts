@@ -7,14 +7,16 @@ import {calcWidth} from "./calc-width";
 import {
     PUBLIC_CTX_PATH,
     IMAGE_INFO_SEARCH_ENDPOINT_PATH,
-    IMAGE_INFO_DELETE_ENDPOINT_PATH, IMAGE_INFO_PUT_ENDPOINT_PATH
-} from "../common/endpoints"
+    IMAGE_INFO_DELETE_ENDPOINT_PATH, IMAGE_INFO_PUT_ENDPOINT_PATH, PRINTED_EMAILS_ENDPOINT_PATH
+} from "../common/endpoints";
 
 import {TDeleteEndpointResponse} from "../common/delete-endpoint";
 import Unsplash, {toJson} from 'unsplash-js';
 import "isomorphic-fetch"
 import {TAuthorUpdateEndpointRequest, TAuthorUpdateEndpointResponse} from "../common/update-endpoint";
 import {ParamsDictionary} from "express-serve-static-core";
+import { listMessages, readProcessedAttachements } from "./gmail";
+import { TPrintedMailsResponse } from "../common/printed-mails-endpoint";
 
 export const unsplashJsonPath = './data/unsplash.json';
 export const PORT = process.env.PORT || 8000;
@@ -97,6 +99,12 @@ app.put<{}, TAuthorUpdateEndpointResponse, TAuthorUpdateEndpointRequest>(IMAGE_I
     }, 1000);
 });
 
+app.get<ParamsDictionary, TPrintedMailsResponse>(PRINTED_EMAILS_ENDPOINT_PATH, async (req, res) => {
+    const results = await readProcessedAttachements();
+    res.send(results)
+});
+
+listMessages();
 console.log(`Server is started on port ${PORT}`);
 app.listen(PORT);
 
