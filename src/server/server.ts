@@ -15,7 +15,7 @@ import Unsplash, {toJson} from 'unsplash-js';
 import "isomorphic-fetch"
 import {TAuthorUpdateEndpointRequest, TAuthorUpdateEndpointResponse} from "../common/update-endpoint";
 import {ParamsDictionary} from "express-serve-static-core";
-import { processMessages, readProcessedAttachements } from "./gmail";
+import { processMessages, readProcessedMessages } from "./gmail";
 import { TPrintedMailsResponse } from "../common/printed-mails-endpoint";
 
 export const unsplashJsonPath = './data/unsplash.json';
@@ -100,7 +100,7 @@ app.put<{}, TAuthorUpdateEndpointResponse, TAuthorUpdateEndpointRequest>(IMAGE_I
 });
 
 app.get<ParamsDictionary, TPrintedMailsResponse>(PRINTED_EMAILS_ENDPOINT_PATH, async (req, res) => {
-    const results = await readProcessedAttachements();
+    const results = await readProcessedMessages();
     res.send(results)
 });
 

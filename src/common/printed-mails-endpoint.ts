@@ -1,15 +1,12 @@
-import { Moment } from "moment";
-
 export interface TAttachmentInfo {
-  timeStamp: Moment;
+  timeStamp: string;
   pagesRanges: string | null;
   reason: string | null;
-  sentDateMmtUtc: Moment;
+  sentDateMmtUtc: string;
   from: string;
   subject: string,
   fileName: string,
   messageId: string,
-  attachmentId: string
 }
 
 
