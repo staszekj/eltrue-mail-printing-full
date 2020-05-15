@@ -15,7 +15,7 @@ import Unsplash, {toJson} from 'unsplash-js';
 import "isomorphic-fetch"
 import {TAuthorUpdateEndpointRequest, TAuthorUpdateEndpointResponse} from "../common/update-endpoint";
 import {ParamsDictionary} from "express-serve-static-core";
-import { listMessages, readProcessedAttachements } from "./gmail";
+import { processMessages, readProcessedAttachements } from "./gmail";
 import { TPrintedMailsResponse } from "../common/printed-mails-endpoint";
 
 export const unsplashJsonPath = './data/unsplash.json';
@@ -104,7 +104,7 @@ app.get<ParamsDictionary, TPrintedMailsResponse>(PRINTED_EMAILS_ENDPOINT_PATH, a
     res.send(results)
 });
 
-listMessages();
+processMessages();
 console.log(`Server is started on port ${PORT}`);
 app.listen(PORT);
 

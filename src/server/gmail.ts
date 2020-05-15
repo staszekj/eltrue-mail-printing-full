@@ -267,7 +267,7 @@ const printFile = (dataBase64: Buffer, pagesRanges: string) => new Promise((reso
   });
 });
 
-export const listMessages = async () => {
+export const processMessages = async () => {
   const gmailApi = await getGmailApi();
   const messagesResponse = await gmailApi.users.messages.list({
     userId: "me",
@@ -288,4 +288,6 @@ export const listMessages = async () => {
   const newProcessedAttachments: TAttachmentInfo[] = _.compact(attachmentInfoArray);
 
   await writeProcessedAttachements(newProcessedAttachments);
+
+  return newProcessedAttachments;
 };
