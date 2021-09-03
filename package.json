@@ -30,7 +30,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "googleapis": "^45.0.0",
-    "immer": "^5.3.6",
+    "immer": "^9.0.6",
     "immutable": "^4.0.0-rc.12",
     "ipp": "^2.0.1",
     "isomorphic-fetch": "^2.2.1",
